@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: smartaudit-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PRIVATE_KEY
+        sync: false
+      - key: GENLAYER_RPC
+        value: https://studio.genlayer.com/api
+      - key: CONTRACT_ADDRESS
+        value: 0x4bD43000F265e1CFE6DDdaE5F0683158C89e6581
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: PYTHON_VERSION
+        value: "3.11.6"
