@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "SmartAudit AI"
+version = "1.0.0"
+id = "artifacts/smartaudit"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21334
+
+[services.development]
+run = "pnpm --filter @workspace/smartaudit run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/smartaudit", "run", "build" ]
+publicDir = "artifacts/smartaudit/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21334"
+BASE_PATH = "/"
